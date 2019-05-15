@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+<title>Integration of Power Functions</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="blank.css" type="text/css">
+<script type="text/javascript" src="//cxd4.github.io/OpenGL-js/gl.js"></script>
+<script type="text/javascript" src="power.js"></script>
+</head>
+
+<body onload="main_GL()">
+<p>
+<i>y</i> = <i>cx</i><sup><i>n</i></sup>
+</p>
+<p>...where:</p>
+<div><i>c</i> = <input type="text" id="c" value="1"></div>
+<div><i>n</i> = <input type="text" id="n" value="2"></div>
+
+<p><button onclick="draw_power()">Graph All</button></p>
+
+<span>
+<noscript>
+JavaScript is required to graph functions from user input.<br>
+</noscript>
+
+<canvas id="GL_canvas" width="512" height="512" onmousemove="tangent_line(event.clientX)">
+Your browser doesn't appear to support the <code>&lt;CANVAS&gt;</code> element.
+</canvas>
+</span>
+
+<div>Tangent line at (<span id="x">x</span>, <span id="y">y</span>):</div>
+<div><i>t</i>(<i>x</i>) = <span id="m">m</span><i>x</i> + <span id="b">b</span></div>
+
+<p>All JavaScript on this website is freedom-respecting software.  <a href="/free-js.html" rel="jslicense">Learn more.</a></p>
+</body>
+</html>

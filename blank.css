@@ -1,0 +1,57 @@
+body {
+    background-color:  #000000;
+    color           :  #FFFFFF;
+    font-family     :  Courier New, Courier, monospace;
+ /* white-space     :  pre; */
+
+/*
+ * We need to do this so that the event.clientX listener in JavaScript is
+ * able to effectively report x-coordinates in the Cartesian plane as
+ * conversions from 0-indexed, pixel-based raster coordinates.
+ */
+    margin-left     :  0px;
+}
+p,div {
+    margin-left:  8px;
+}
+
+canvas {
+    border          :  0px solid #808080;
+    background-color:  transparent;
+}
+
+table.t {
+    margin-left     :  auto;
+    margin-right    :  auto;
+}
+td.t { /* titular data */
+    text-align:  center;
+}
+
+/*
+ * Color-code the function names to match the colors in the graph.
+ */
+.red {
+    color:  #FF0000;
+}
+.blu {
+    color:  #0000FF;
+}
+.yel {
+    color:  #FFFF00;
+}
+.grn {
+    color:  #00FF00;
+}
+.mag {
+    color:  #FF00FF;
+}
+.cyn {
+    color:  #00FFFF;
+}
+.orn {
+    color:  #FF8000;
+}
+.ind {
+    color:  #8000FF;
+}
