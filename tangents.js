@@ -1,4 +1,4 @@
-function tangent_line(x_raster) {
+function tan_power(x_raster) {
     "use strict";
     var coords = 4;
     var stride = coords * 4; /* coords * sizeof(GLfloat) */
