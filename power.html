@@ -9,7 +9,7 @@
 <script type="text/javascript" src="tangents.js"></script>
 </head>
 
-<body onload="main_GL()">
+<body onload="main_GL(); graph_power()">
 <table>
 <tr><td class="t">+1</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr>
@@ -25,10 +25,8 @@ Your browser doesn't appear to support the <code>&lt;CANVAS&gt;</code> element.
 <td>
 <div><i>y</i> = <i>cx</i><sup><i>n</i></sup></div>
 <div>...where:</div>
-<div><i>c</i> = <input type="text" id="c" value="1"></div>
-<div><i>n</i> = <input type="text" id="n" value="2"></div>
-
-<p><button onclick="graph_power()">Update Graph</button></p>
+<div><i>c</i> = <input type="text" id="c" value="1" oninput="graph_power()"></div>
+<div><i>n</i> = <input type="text" id="n" value="2" oninput="graph_power()"></div>
 </td>
 </tr>
 
