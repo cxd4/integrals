@@ -11,9 +11,6 @@ function clear_graph() {
         0, +inverse_zoom, 0.0, inverse_zoom
     ];
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     glColor4f(1, 1, 1, 1.000);
 
@@ -62,6 +59,8 @@ function main_GL() {
         return;
     }
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     clear_graph();
     do {
         error_code = glGetError();
