@@ -45,7 +45,7 @@ function var_from_URI(name)
     offset += 1; /* Jump past the '?' or '&' character. */
     offset += name.length; /* Jump past the variable name itself. */
     offset += 1; /* Jump past the '=' sign character. */
-    offset2 = href.indexOf(offset, "&");
+    offset2 = href.indexOf("&", offset);
     if (offset2 < 0) {
         offset2 = href.length;
     }
