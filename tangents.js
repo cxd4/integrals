@@ -31,7 +31,6 @@ function tan_power(x_raster) {
     graph_power();
     glEnableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
-    glLineWidth(1.0);
 
     glColor4f(1, 0, 0, 1); /* red (tangent line function of derivative) */
     glVertexPointer(coords, GL_FLOAT, stride, vertex_buffer);

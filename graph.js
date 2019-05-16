@@ -5,10 +5,10 @@ var inverse_zoom = 1.0; /* graph magnification = 1 / inverse_zoom */
 function clear_graph() {
     "use strict"
     var grid = [
-        -1, 0, 0, 1,
-        +1, 0, 0, 1,
-        0, -1, 0, 1,
-        0, +1, 0, 1
+        -inverse_zoom, 0, 0.0, inverse_zoom,
+        +inverse_zoom, 0, 0.0, inverse_zoom,
+        0, -inverse_zoom, 0.0, inverse_zoom,
+        0, +inverse_zoom, 0.0, inverse_zoom
     ];
 
     glEnable(GL_BLEND);
@@ -20,10 +20,8 @@ function clear_graph() {
     glClearColor(0, 0, 0, 0.000);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glVertexPointer(2, GL_FLOAT, 4 * 4, grid);
+    glVertexPointer(4, GL_FLOAT, 4 * 4, grid);
     glEnableClientState(GL_VERTEX_ARRAY);
-
-    glLineWidth(1.0);
     glDisableClientState(GL_COLOR_ARRAY);
 
     glDrawArrays(GL_LINES, 0, 2); /* x-axis */
@@ -57,6 +55,7 @@ function var_from_URI(name)
 function main_GL() {
     "use strict";
     var error_code;
+    var line_width = var_from_URI("l");
 
     if (GL_get_context(document, "GL_canvas") === null) {
         alert("Failed to initialize WebGL.");
@@ -76,6 +75,11 @@ function main_GL() {
     document.getElementById("wu").innerHTML = inverse_zoom;
     document.getElementById("wd").innerHTML = inverse_zoom;
     document.getElementById("wr").innerHTML = inverse_zoom;
+
+    if (!(line_width > 0)) {
+        line_width = 1;
+    }
+    glLineWidth(line_width);
     return;
 }
 
@@ -113,7 +117,6 @@ function graph_power() {
     clear_graph();
     glEnableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
-    glLineWidth(1.0);
 
     glColor4f(0, 1, 0, 1); /* green (original function) */
     glVertexPointer(coords, GL_FLOAT, stride, vertex_buffer);
