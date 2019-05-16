@@ -2,13 +2,13 @@ function tan_power(x_raster) {
     "use strict";
     var coords = 4;
     var stride = coords * 4; /* coords * sizeof(GLfloat) */
+    var vertex_buffer = [
+        -1 * inverse_zoom, null, 0.0, inverse_zoom,
+	+1 * inverse_zoom, null, 0.0, inverse_zoom
+    ];
 
     var y1, m, b;
-    var x1 = (2 * x_raster / raster_pitch) - 1.0;
-    var vertex_buffer = [
-        -1, null, 0.0, inverse_zoom,
-	+1, null, 0.0, inverse_zoom
-    ];
+    var x1 = 2*(x_raster/raster_pitch - 0.5) * inverse_zoom;
 
     var c = document.getElementById("c").value;
     var n = document.getElementById("n").value;

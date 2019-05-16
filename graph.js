@@ -31,6 +31,29 @@ function clear_graph() {
     return;
 }
 
+function var_from_URI(name)
+{
+    "use strict";
+    var offset, offset1, offset2;
+    var href = document.location.href;
+
+    offset1 = href.indexOf("?" + name + "=");
+    offset2 = href.lastIndexOf("&" + name + "=");
+    offset = (offset1 < offset2) ? offset2 : offset1;
+
+    if (offset < 0) {
+        return;
+    }
+    offset += 1; /* Jump past the '?' or '&' character. */
+    offset += name.length; /* Jump past the variable name itself. */
+    offset += 1; /* Jump past the '=' sign character. */
+    offset2 = href.indexOf(offset, "&");
+    if (offset2 < 0) {
+        offset2 = href.length;
+    }
+    return href.substring(offset, offset2);
+}
+
 function main_GL() {
     "use strict";
     var error_code;
@@ -45,6 +68,14 @@ function main_GL() {
         error_code = glGetError();
         console.log("OpenGL error status:  " + error_code);
     } while (error_code !== GL_NO_ERROR);
+
+    inverse_zoom = var_from_URI("w");
+    if (!(inverse_zoom > 0)) {
+        inverse_zoom = 1;
+    }
+    document.getElementById("wu").innerHTML = inverse_zoom;
+    document.getElementById("wd").innerHTML = inverse_zoom;
+    document.getElementById("wr").innerHTML = inverse_zoom;
     return;
 }
 
@@ -55,18 +86,25 @@ function main_GL() {
 
 function graph_power() {
     "use strict";
-    var x = -1.0 / inverse_zoom;
+    var x = -1.0 * inverse_zoom;
     var i = 0;
-    var coords = 2;
+    var coords = 4;
     var stride = 4 * 4; /* coords_per_vertex * sizeof(GLfloat) */
     var vertex_buffer = [];
 
-    var c;
-    var n;
+    var c = document.getElementById("c").value;
+    var n = document.getElementById("n").value;
+    if (!c) {
+        c = 1;
+    }
+    if (!n) {
+        n = 0;
+    }
 
     while (i < raster_pitch) {
         vertex_buffer[4*i + X] = x;
-        x += 2.0 / raster_pitch;
+        vertex_buffer[4*i + Y] = c * Math.pow(x, n);
+        x += (1.0 * 2) / (raster_pitch / inverse_zoom);
         vertex_buffer[4*i + Z] = 0.0;
         vertex_buffer[4*i + W] = inverse_zoom;
         i += 1;
@@ -77,22 +115,6 @@ function graph_power() {
     glDisableClientState(GL_COLOR_ARRAY);
     glLineWidth(1.0);
 
-    c = document.getElementById("c").value;
-    if (!c) {
-        c = 1;
-    }
-    n = document.getElementById("n").value;
-    if (!n) {
-        n = 0;
-    }
-
-    i = 0;
-    x = -1.0 / inverse_zoom;
-    while (i < raster_pitch) {
-        vertex_buffer[4*i + Y] = c * Math.pow(x, n);
-        x += 2.0 / raster_pitch;
-        i += 1;
-    }
     glColor4f(0, 1, 0, 1); /* green (original function) */
     glVertexPointer(coords, GL_FLOAT, stride, vertex_buffer);
     glDrawArrays(GL_LINE_STRIP, 0, i);
