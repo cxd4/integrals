@@ -11,6 +11,10 @@ body {
  */
     margin-left     :  0px;
 }
+table {
+    border-collapse:  collapse;
+}
+
 p,div {
     margin-left:  8px;
 }
