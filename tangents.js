@@ -23,7 +23,7 @@ function tan_power(x_raster) {
     vertex_buffer[4 * 1 + Y] = m * (vertex_buffer[4 * 1 + X] - x1) + y1;
 
     clear_graph();
-    document.getElementById("x").innerHTML = x1;
+    document.getElementById("x").innerHTML = x1 * raster_pitch/2 + "/" + raster_pitch/2;
     document.getElementById("y").innerHTML = y1;
     document.getElementById("m").innerHTML = m;
     document.getElementById("b").innerHTML = b;

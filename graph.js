@@ -79,6 +79,14 @@ function main_GL() {
         line_width = 1;
     }
     glLineWidth(line_width);
+
+    raster_pitch = var_from_URI("r");
+    if (!(raster_pitch > 0)) {
+        raster_pitch = 512;
+    }
+    document.getElementById("GL_canvas").width = raster_pitch;
+    document.getElementById("GL_canvas").height = raster_pitch;
+    glViewport(0, 0, raster_pitch, raster_pitch);
     return;
 }
 
