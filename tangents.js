@@ -24,10 +24,9 @@ function raster_to_vector(x_raster) {
     return (scaled_x);
 }
 
-function tan_power(x_raster) {
+function tan_power(x1) {
     "use strict";
     var y1, m, b;
-    var x1 = raster_to_vector(x_raster);
 
     var c = var_from_form("c");
     var n = var_from_form("n");
@@ -50,10 +49,9 @@ function tan_power(x_raster) {
     tan_f();
     return;
 }
-function tan_exp(x_raster) {
+function tan_exp(x1) {
     "use strict";
     var y1, m, b;
-    var x1 = raster_to_vector(x_raster);
 
     var c = var_from_form("c");
     var b = var_from_form("b");

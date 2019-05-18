@@ -19,6 +19,31 @@
 </TR>
 </TABLE>
 
+<P>Graphs are customizable by passing the following configuration settings in the web address bar.  (For example, directing your browser to <A HREF="power.html?l=4">power.html?l=4</A> draws the function with a line stroke of 4 pixels in width, while <A HREF="power.html?l=2">power.html?l=2</A> only draws lines half as thick.)  All settings must be positive numbers.</P>
+<TABLE BORDER="1" WIDTH="100%">
+<TR><TD ALIGN="CENTER">var</TD><TD ALIGN="CENTER">Description</TD><TD ALIGN="CENTER">default value</TD></TR>
+<TR>
+ <TD>l</TD>
+ <TD>Thickness of line strokes, in pixels.</TD>
+ <TD>1.0</TD>
+</TR>
+<TR>
+ <TD>r</TD>
+ <TD>Scope, range and resolution of coordinate plane projection in raster coordinates.  For rescaling the graph to better suit your monitor resolution and window size.</TD>
+ <TD>512</TD>
+</TR>
+<TR>
+ <TD>w</TD>
+ <TD>Coordinate plane window span and width, in vector units.  For adjusting the coverage inside the graph of a wider field of the function's domain and range.</TD>
+ <TD>1.0</TD>
+</TR>
+<TR>
+ <TD>x</TD>
+ <TD>Immediately draw the tangent line to the function at the point (<I>x</I>, <I>f</I>(<I>x</I>)).</TD>
+ <TD>undefined</TD>
+</TR>
+</TABLE>
+
 <P>All JavaScript on this website is freedom-respecting software.  <A href="/free-js.html" rel="jslicense">Learn more.</A></P>
 </BODY>
 

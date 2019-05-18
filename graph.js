@@ -107,8 +107,11 @@ function main_GL() {
     return;
 }
 
-function graph_f() {
+var first_time_graphing = true;
+function graph_f(callback) {
     "use strict";
+    var x = var_from_URI("x");
+
     clear_graph();
     glEnableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
@@ -116,6 +119,11 @@ function graph_f() {
     glColor4f(0, 1, 0, 1); /* green (original function) */
     glVertexPointer(4, GL_FLOAT, 4 * 4, vertex_buffer);
     glDrawArrays(GL_LINE_STRIP, 0, raster_pitch);
+
+    if (first_time_graphing && x) {
+        first_time_graphing = false;
+        callback(x);
+    }
     return;
 }
 
@@ -136,7 +144,7 @@ function graph_power() {
         x += (2 * inverse_zoom) / raster_pitch;
         i += 1;
     }
-    graph_f();
+    graph_f(tan_power);
     return;
 }
 function graph_exp() {
@@ -151,6 +159,6 @@ function graph_exp() {
         x += (2 * inverse_zoom) / raster_pitch;
         i += 1;
     }
-    graph_f();
+    graph_f(tan_exp);
     return;
 }
