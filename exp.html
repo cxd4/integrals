@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Integration of Exponential Functions</title>
+<link rel="stylesheet" href="math.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="//cxd4.github.io/OpenGL-js/gl.js"></script>
+<script type="text/javascript" src="graph.js"></script>
+<script type="text/javascript" src="tangents.js"></script>
+</head>
+
+<body onload="main_GL(); graph_exp()">
+<table>
+<tr><td class="t">0 &plus; <span id="wu">1</span></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr>
+
+<td>
+<noscript>JavaScript is required to graph functions from user input.</noscript>
+<canvas id="GL_canvas" width="512" height="512" onmousemove="tan_exp(event.clientX)">
+Your browser doesn't appear to support the <code>&lt;CANVAS&gt;</code> element.
+</canvas>
+</td>
+<td>&plus;<span id="wr">1</span></td>
+
+<td>
+<div><i>y</i> = <i>cb</i><sup><i>x</i></sup></div>
+<div>...where:</div>
+<div><i>c</i> = <input type="text" id="c" value="1" oninput="graph_exp()"></div>
+<div><i>b</i> = <input type="text" id="b" value="2" oninput="graph_exp()"></div>
+</td>
+</tr>
+
+<tr>
+<td class="t">0 &minus; <span id="wd">1</span></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+<div>Tangent line at (<span id="x">x</span>, <span id="y">y</span>):</div>
+<div><i>t</i>(<i>x</i>) = <span id="m">[log<sub><i>e</i></sub>(<i>b</i>) &times; <i>cb</i><sup><i>x</i></sup>]</span><i>x</i> + <span id="b">b</span></div>
+
+<p>All JavaScript on this website is freedom-respecting software.  <a href="/free-js.html" rel="jslicense">Learn more.</a></p>
+</body>
+</html>

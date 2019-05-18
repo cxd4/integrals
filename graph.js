@@ -74,6 +74,7 @@ function main_GL() {
     document.getElementById("wu").innerHTML = inverse_zoom;
     document.getElementById("wd").innerHTML = inverse_zoom;
     document.getElementById("wr").innerHTML = inverse_zoom;
+    line_cache[4*1 + W] = line_cache[4*0 + W] = inverse_zoom;
 
     if (!(line_width > 0)) {
         line_width = 1;
@@ -115,6 +116,41 @@ function graph_power() {
     while (i < raster_pitch) {
         vertex_buffer[4*i + X] = x;
         vertex_buffer[4*i + Y] = c * Math.pow(x, n);
+        x += (1.0 * 2) / (raster_pitch / inverse_zoom);
+        vertex_buffer[4*i + Z] = 0.0;
+        vertex_buffer[4*i + W] = inverse_zoom;
+        i += 1;
+    }
+
+    clear_graph();
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+
+    glColor4f(0, 1, 0, 1); /* green (original function) */
+    glVertexPointer(coords, GL_FLOAT, stride, vertex_buffer);
+    glDrawArrays(GL_LINE_STRIP, 0, i);
+    return;
+}
+function graph_exp() {
+    "use strict";
+    var x = -1.0 * inverse_zoom;
+    var i = 0;
+    var coords = 4;
+    var stride = 4 * 4; /* coords_per_vertex * sizeof(GLfloat) */
+    var vertex_buffer = [];
+
+    var c = document.getElementById("c").value;
+    var b = document.getElementById("b").value;
+    if (!c) {
+        c = 1;
+    }
+    if (!b) {
+        b = 0;
+    }
+
+    while (i < raster_pitch) {
+        vertex_buffer[4*i + X] = x;
+        vertex_buffer[4*i + Y] = c * Math.pow(b, x);
         x += (1.0 * 2) / (raster_pitch / inverse_zoom);
         vertex_buffer[4*i + Z] = 0.0;
         vertex_buffer[4*i + W] = inverse_zoom;
