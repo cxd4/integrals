@@ -26,8 +26,7 @@ function clear_graph() {
     return;
 }
 
-function var_from_URI(name)
-{
+function var_from_URI(name) {
     "use strict";
     var offset, offset1, offset2;
     var href = document.location.href;
@@ -47,6 +46,15 @@ function var_from_URI(name)
         offset2 = href.length;
     }
     return href.substring(offset, offset2);
+}
+function var_from_form(name, default_value) {
+    "use strict";
+    var found_value = document.getElementById(name).value;
+
+    if (!found_value) {
+        return (default_value);
+    }
+    return (found_value);
 }
 
 function main_GL() {
@@ -104,14 +112,8 @@ function graph_power() {
     var stride = 4 * 4; /* coords_per_vertex * sizeof(GLfloat) */
     var vertex_buffer = [];
 
-    var c = document.getElementById("c").value;
-    var n = document.getElementById("n").value;
-    if (!c) {
-        c = 1;
-    }
-    if (!n) {
-        n = 0;
-    }
+    var c = var_from_form("c", 1);
+    var n = var_from_form("n", 0);
 
     while (i < raster_pitch) {
         vertex_buffer[4*i + X] = x;
@@ -139,14 +141,8 @@ function graph_exp() {
     var stride = 4 * 4; /* coords_per_vertex * sizeof(GLfloat) */
     var vertex_buffer = [];
 
-    var c = document.getElementById("c").value;
-    var b = document.getElementById("b").value;
-    if (!c) {
-        c = 1;
-    }
-    if (!b) {
-        b = 0;
-    }
+    var c = var_from_form("c", 1);
+    var b = var_from_form("b", 0);
 
     while (i < raster_pitch) {
         vertex_buffer[4*i + X] = x;

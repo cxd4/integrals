@@ -11,8 +11,8 @@ function tan_power(x_raster) {
     var y1, m, b;
     var x1 = 2*(x_raster/raster_pitch - 0.5) * inverse_zoom;
 
-    var c = document.getElementById("c").value;
-    var n = document.getElementById("n").value;
+    var c = var_from_form("c");
+    var n = var_from_form("n");
     if (!c || !n) {
         return;
     }
@@ -48,8 +48,8 @@ function tan_exp(x_raster) {
     var y1, m, b;
     var x1 = 2*(x_raster/raster_pitch - 0.5) * inverse_zoom;
 
-    var c = document.getElementById("c").value;
-    var b = document.getElementById("b").value;
+    var c = var_from_form("c");
+    var b = var_from_form("b");
     if (!c || !b) {
         return;
     }
