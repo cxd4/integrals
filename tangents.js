@@ -12,11 +12,22 @@ function tan_f() {
     glDrawArrays(GL_LINES, 0, 2);
     return;
 }
+function raster_to_vector(x_raster) {
+    "use strict";
+    var left_margin = parseInt(document.body.style.marginLeft);
+    var x_minus_left_margin = x_raster - left_margin - 0;
+
+    var zero_indexed_coord = x_minus_left_margin / raster_pitch;
+    var neg_one_indexed = 2 * (zero_indexed_coord - 0.5);
+    var scaled_x = neg_one_indexed * inverse_zoom;
+
+    return (scaled_x);
+}
 
 function tan_power(x_raster) {
     "use strict";
     var y1, m, b;
-    var x1 = 2*(x_raster/raster_pitch - 0.5) * inverse_zoom;
+    var x1 = raster_to_vector(x_raster);
 
     var c = var_from_form("c");
     var n = var_from_form("n");
@@ -42,7 +53,7 @@ function tan_power(x_raster) {
 function tan_exp(x_raster) {
     "use strict";
     var y1, m, b;
-    var x1 = 2*(x_raster/raster_pitch - 0.5) * inverse_zoom;
+    var x1 = raster_to_vector(x_raster);
 
     var c = var_from_form("c");
     var b = var_from_form("b");

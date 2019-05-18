@@ -3,13 +3,6 @@ body {
     color           :  #FFFFFF;
     font-family     :  Georgia, serif;
  /* white-space     :  pre; */
-
-/*
- * We need to do this so that the event.clientX listener in JavaScript is
- * able to effectively report x-coordinates in the Cartesian plane as
- * conversions from 0-indexed, pixel-based raster coordinates.
- */
-    margin-left     :  0px;
 }
 table {
     border-collapse:  collapse;

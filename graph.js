@@ -7,10 +7,10 @@ var vertex_buffer = [];
 function clear_graph() {
     "use strict"
     var grid = [
-        -inverse_zoom, 0, 0.0, inverse_zoom,
-        +inverse_zoom, 0, 0.0, inverse_zoom,
-        0, -inverse_zoom, 0.0, inverse_zoom,
-        0, +inverse_zoom, 0.0, inverse_zoom
+        -inverse_zoom - 1, 0, 0.0, inverse_zoom,
+        +inverse_zoom + 1, 0, 0.0, inverse_zoom,
+        0, -inverse_zoom - 1, 0.0, inverse_zoom,
+        0, +inverse_zoom + 1, 0.0, inverse_zoom
     ];
 
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -73,6 +73,7 @@ function main_GL() {
         return;
     }
     glLineWidth(var_from_URI("l", 1));
+    document.body.style.marginLeft = "8px"; /* needed for tangent.js to read */
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
