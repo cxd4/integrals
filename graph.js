@@ -26,9 +26,10 @@ function clear_graph() {
     return;
 }
 
-function var_from_URI(name) {
+function var_from_URI(name, default_value) {
     "use strict";
     var offset, offset1, offset2;
+    var tentative_value;
     var href = document.location.href;
 
     offset1 = href.indexOf("?" + name + "=");
@@ -36,16 +37,19 @@ function var_from_URI(name) {
     offset = (offset1 < offset2) ? offset2 : offset1;
 
     if (offset < 0) {
-        return;
+        return (default_value);
     }
-    offset += 1; /* Jump past the '?' or '&' character. */
-    offset += name.length; /* Jump past the variable name itself. */
-    offset += 1; /* Jump past the '=' sign character. */
+    offset += 1 + name.length + 1; /* Jump past ?/&, (name), and '='. */
     offset2 = href.indexOf("&", offset);
     if (offset2 < 0) {
         offset2 = href.length;
     }
-    return href.substring(offset, offset2);
+    tentative_value = href.substring(offset, offset2);
+
+    if (tentative_value > 0) {
+        return (tentative_value);
+    }
+    return (default_value);
 }
 function var_from_form(name, default_value) {
     "use strict";
@@ -60,12 +64,12 @@ function var_from_form(name, default_value) {
 function main_GL() {
     "use strict";
     var error_code;
-    var line_width = var_from_URI("l");
 
     if (GL_get_context(document, "GL_canvas") === null) {
         alert("Failed to initialize WebGL.");
         return;
     }
+    glLineWidth(var_from_URI("l", 1));
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -75,24 +79,13 @@ function main_GL() {
         console.log("OpenGL error status:  " + error_code);
     } while (error_code !== GL_NO_ERROR);
 
-    inverse_zoom = var_from_URI("w");
-    if (!(inverse_zoom > 0)) {
-        inverse_zoom = 1;
-    }
+    inverse_zoom = var_from_URI("w", 1);
     document.getElementById("wu").innerHTML = inverse_zoom;
     document.getElementById("wd").innerHTML = inverse_zoom;
     document.getElementById("wr").innerHTML = inverse_zoom;
     line_cache[4*1 + W] = line_cache[4*0 + W] = inverse_zoom;
 
-    if (!(line_width > 0)) {
-        line_width = 1;
-    }
-    glLineWidth(line_width);
-
-    raster_pitch = var_from_URI("r");
-    if (!(raster_pitch > 0)) {
-        raster_pitch = 512;
-    }
+    raster_pitch = var_from_URI("r", 512);
     document.getElementById("GL_canvas").width = raster_pitch;
     document.getElementById("GL_canvas").height = raster_pitch;
     glViewport(0, 0, raster_pitch, raster_pitch);
