@@ -12,12 +12,19 @@ function tan_f() {
     glDrawArrays(GL_LINES, 0, 2);
     return;
 }
+
+function align_pitch(pitch) {
+    "use strict";
+    var precision_error = pitch % 2;
+    return (pitch - precision_error);
+}
 function raster_to_vector(x_raster) {
     "use strict";
     var left_margin = parseInt(document.body.style.marginLeft);
-    var x_minus_left_margin = x_raster - left_margin - 0;
+    var x_minus_left_margin = x_raster - left_margin - (raster_pitch % 2);
 
-    var zero_indexed_coord = x_minus_left_margin / raster_pitch;
+    var scalar_divisor = align_pitch(raster_pitch);
+    var zero_indexed_coord = x_minus_left_margin / scalar_divisor;
     var neg_one_indexed = 2 * (zero_indexed_coord - 0.5);
     var scaled_x = neg_one_indexed * inverse_zoom;
 
@@ -40,7 +47,8 @@ function tan_power(x1) {
     line_cache[4*0 + Y] = m * (line_cache[4*0 + X] - x1) + y1;
     line_cache[4*1 + Y] = m * (line_cache[4*1 + X] - x1) + y1;
 
-    document.getElementById("x").innerHTML = x1 * raster_pitch/2 + "/" + raster_pitch/2;
+    document.getElementById("x").innerHTML =
+        x1 * align_pitch(raster_pitch)/2 + "/" + align_pitch(raster_pitch)/2;
     document.getElementById("y").innerHTML = y1;
     document.getElementById("m").innerHTML = m;
     document.getElementById("yint").innerHTML = b;
@@ -65,7 +73,8 @@ function tan_exp(x1) {
     line_cache[4*0 + Y] = m * (line_cache[4*0 + X] - x1) + y1;
     line_cache[4*1 + Y] = m * (line_cache[4*1 + X] - x1) + y1;
 
-    document.getElementById("x").innerHTML = x1 * raster_pitch/2 + "/" + raster_pitch/2;
+    document.getElementById("x").innerHTML =
+        x1 * align_pitch(raster_pitch)/2 + "/" + align_pitch(raster_pitch)/2;
     document.getElementById("y").innerHTML = y1;
     document.getElementById("m").innerHTML = m;
     document.getElementById("yint").innerHTML = b;

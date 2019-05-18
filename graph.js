@@ -1,5 +1,5 @@
 var X = 0, Y = 1, Z = 2, W = 3;
-var raster_pitch = 512; /* attributes 'width' and 'height' of CANVAS element */
+var raster_pitch = 513; /* attributes 'width' and 'height' of CANVAS element */
 var inverse_zoom = 1.0; /* graph magnification = 1 / inverse_zoom */
 
 var vertex_buffer = [];
@@ -101,7 +101,7 @@ function main_GL() {
     line_cache[4*1 + X] = +inverse_zoom;
     line_cache[4*1 + W] = line_cache[4*0 + W] = inverse_zoom;
 
-    raster_pitch = var_from_URI("r", 512);
+    raster_pitch = var_from_URI("r", 512 + 1);
     document.getElementById("GL_canvas").width = raster_pitch;
     document.getElementById("GL_canvas").height = raster_pitch;
     glViewport(0, 0, raster_pitch, raster_pitch);
