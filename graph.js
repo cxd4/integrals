@@ -48,7 +48,7 @@ function var_from_URI(name, default_value) {
     }
     tentative_value = href.substring(offset, offset2);
 
-    if (tentative_value > 0) {
+    if (tentative_value) {
         return (tentative_value);
     }
     return (default_value);
@@ -67,12 +67,22 @@ function main_GL() {
     "use strict";
     var error_code;
     var i = 0;
+    var user_vars = "bcn";
 
     if (GL_get_context(document, "GL_canvas") === null) {
         alert("Failed to initialize WebGL.");
         return;
     }
     glLineWidth(var_from_URI("l", 1));
+
+    while (i < user_vars.length) {
+        var user_def = var_from_URI(user_vars[i]);
+        if (parseFloat(user_def)) {
+            document.getElementById(user_vars[i]).value = user_def;
+        }
+        i += 1;
+    }
+    i = 0;
     document.body.style.marginLeft = "8px"; /* needed for tangent.js to read */
 
     glEnable(GL_BLEND);
