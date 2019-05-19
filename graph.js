@@ -49,7 +49,7 @@ function var_from_URI(name, default_value) {
     tentative_value = href.substring(offset, offset2);
 
     if (tentative_value) {
-        return (tentative_value);
+        return Number(tentative_value);
     }
     return (default_value);
 }
@@ -60,7 +60,7 @@ function var_from_form(name, default_value) {
     if (!found_value) {
         return (default_value);
     }
-    return (found_value);
+    return Number(found_value);
 }
 
 function main_GL() {
@@ -146,8 +146,8 @@ function graph_linear() {
     "use strict";
     var i = 0;
     var x = -inverse_zoom;
-    var a = parseFloat(var_from_form("a", 1));
-    var b = parseFloat(var_from_form("b", 0));
+    var a = var_from_form("a", 1);
+    var b = var_from_form("b", 0);
 
     while (i < raster_pitch) {
         vertex_buffer[4*i + Y] = (a * x) + b;

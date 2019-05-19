@@ -35,9 +35,9 @@ function tan_linear(x1) {
     "use strict";
     var y1, m, b;
 
-    var a = parseFloat(var_from_form("a"));
-    var b = parseFloat(var_from_form("b"));
-    if (!a || !b) {
+    var a = var_from_form("a", NaN);
+    var b = var_from_form("b", NaN);
+    if (a === NaN || b === NaN) {
         return;
     }
 
@@ -61,9 +61,9 @@ function tan_power(x1) {
     "use strict";
     var y1, m, b;
 
-    var c = var_from_form("c");
-    var n = var_from_form("n");
-    if (!c || !n) {
+    var c = var_from_form("c", NaN);
+    var n = var_from_form("n", NaN);
+    if (c === NaN || n === NaN) {
         return;
     }
 
@@ -87,9 +87,9 @@ function tan_exp(x1) {
     "use strict";
     var y1, m, b;
 
-    var c = var_from_form("c");
-    var b = var_from_form("b");
-    if (!c || !b) {
+    var c = var_from_form("c", NaN);
+    var b = var_from_form("b", NaN);
+    if (c === NaN || b === NaN) {
         return;
     }
 
