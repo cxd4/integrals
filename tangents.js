@@ -31,6 +31,32 @@ function raster_to_vector(x_raster) {
     return (scaled_x);
 }
 
+function tan_linear(x1) {
+    "use strict";
+    var y1, m, b;
+
+    var a = parseFloat(var_from_form("a"));
+    var b = parseFloat(var_from_form("b"));
+    if (!a || !b) {
+        return;
+    }
+
+    y1 = (a * x1) + b;
+    m = a; /* f'(x1) */
+    b = m * (0 - x1) + y1;
+    line_cache[4*0 + Y] = m * (line_cache[4*0 + X] - x1) + y1;
+    line_cache[4*1 + Y] = m * (line_cache[4*1 + X] - x1) + y1;
+
+    document.getElementById("x").innerHTML =
+        x1 * align_pitch(raster_pitch)/2 + "/" + align_pitch(raster_pitch)/2;
+    document.getElementById("y").innerHTML = y1;
+    document.getElementById("m").innerHTML = m;
+    document.getElementById("yint").innerHTML = b;
+
+    graph_linear();
+    tan_f();
+    return;
+}
 function tan_power(x1) {
     "use strict";
     var y1, m, b;

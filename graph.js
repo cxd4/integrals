@@ -142,6 +142,21 @@ function graph_f(callback) {
  * Begin definitions for graph construction functions.
  */
 
+function graph_linear() {
+    "use strict";
+    var i = 0;
+    var x = -inverse_zoom;
+    var a = parseFloat(var_from_form("a", 1));
+    var b = parseFloat(var_from_form("b", 0));
+
+    while (i < raster_pitch) {
+        vertex_buffer[4*i + Y] = (a * x) + b;
+        x += (2 * inverse_zoom) / raster_pitch;
+        i += 1;
+    }
+    graph_f(tan_linear);
+    return;
+}
 function graph_power() {
     "use strict";
     var i = 0;
