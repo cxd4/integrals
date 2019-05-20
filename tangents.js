@@ -67,8 +67,8 @@ function tan_power(x1) {
         return;
     }
 
-    y1 = c * Math.pow(x1, n);
-    m = c * n * Math.pow(x1, n - 1); /* f'(x1) */
+    y1 = c * power(x1, n);
+    m = c * n * power(x1, n - 1); /* f'(x1) */
     b = m * (0 - x1) + y1;
     line_cache[4*0 + Y] = m * (line_cache[4*0 + X] - x1) + y1;
     line_cache[4*1 + Y] = m * (line_cache[4*1 + X] - x1) + y1;
@@ -120,8 +120,8 @@ function tan_exp(x1) {
         return;
     }
 
-    y1 = c * Math.pow(b, x1);
-    m = c * Math.log(b) * Math.pow(b, x1); /* f'(x1) */
+    y1 = c * power(b, x1);
+    m = c * Math.log(b) * power(b, x1); /* f'(x1) */
     b = m * (0 - x1) + y1;
     line_cache[4*0 + Y] = m * (line_cache[4*0 + X] - x1) + y1;
     line_cache[4*1 + Y] = m * (line_cache[4*1 + X] - x1) + y1;

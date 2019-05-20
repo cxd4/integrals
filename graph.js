@@ -139,14 +139,13 @@ function graph_f(callback) {
 
 function root(x, index) {
     "use strict";
-    var evaluation;
     var a = index;
     var b = 1;
+    var evaluation = Math.pow(x, b / index);
 
     if (index === 0) {
         return (undefined); /* 0th root of x = x^(C/0), which is asymptotal. */
     }
-    evaluation = Math.pow(x, 1 / index);
     if (!isNaN(evaluation)) { /* Math.pow(-2, 1 / 0.5) doesn't need our help. */
         return (evaluation);
     }
@@ -156,20 +155,23 @@ function root(x, index) {
  * account not only for whether n is an even or odd integer but also for the
  * liklihood that the user will set n to non-integer, floating-point values.
  *
- * Since C is implemented on most computers with FLT_RADIX defined to 2, it
+ * While C is implemented on most computers with FLT_RADIX defined to 2, it
  * makes sense to take a non-integer ratio of (a/b = n/1) and keep
- * multiplying both a and b by 2 until we have a ratio of integers.
- *
- * Note that this does not recover lost precision from quotients such as
- * 7/9 ~= 77778/100000, due to round-off precision loss from binary storage.
+ * multiplying both a and b by 10 until we have a ratio of integers, since
+ * 10 (and not 2) is the arithmetic base the user perceives input to be in.
+ */
+    while (a % 1 !== 0) {
+        a *= 10;
+        b *= 10;
+    }
+
+/*
+ * Account for cases such as the (6/4)-root of x = x^(4/6).
+ * x^(4/6) is an odd-index root due to the fact that 4/6 is 2/3.
  */
     while (a % 2 === 0 && b % 2 === 0) {
         a /= 2;
         b /= 2;
-    } 
-    while (a % 1 !== 0) {
-        a *= 2;
-        b *= 2;
     }
 // alert("a / b = " + a + " / " + b + " ~= " + a / b);
 
@@ -178,6 +180,30 @@ function root(x, index) {
         return (NaN); /* Even-roots of x when (x < 0) are never real numbers. */
     }
     return -Math.pow(-x, 1 / index); /* e.g., (-8)^(3333/10000) hacked to -2 */
+}
+function power(x, n) {
+    "use strict";
+    var a = n;
+    var b = 1;
+
+    if (x >= 0) {
+        return Math.pow(x, n);
+    }
+
+    while (a % 1 !== 0) {
+        a *= 10;
+        b *= 10;
+    }
+    while (a % 2 === 0 && b % 2 === 0) {
+        a /= 2;
+        b /= 2;
+    }
+// alert("a / b = " + a + " / " + b + " ~= " + a / b);
+
+    if (b % 2 === 0) {
+        return (NaN); /* Even-roots of x when (x < 0) are never real numbers. */
+    }
+    return -Math.pow(-x, n);
 }
 
 /**
@@ -208,7 +234,7 @@ function graph_power() {
     var n = var_from_form("n", 2);
 
     while (i < raster_pitch) {
-        vertex_buffer[4*i + Y] = c * Math.pow(x, n);
+        vertex_buffer[4*i + Y] = c * power(x, n);
         x += (2 * inverse_zoom) / raster_pitch;
         i += 1;
     }
@@ -238,7 +264,7 @@ function graph_exp() {
     var b = var_from_form("b", Math.E);
 
     while (i < raster_pitch) {
-        vertex_buffer[4*i + Y] = c * Math.pow(b, x);
+        vertex_buffer[4*i + Y] = c * power(b, x);
         x += (2 * inverse_zoom) / raster_pitch;
         i += 1;
     }
