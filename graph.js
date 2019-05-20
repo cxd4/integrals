@@ -48,16 +48,16 @@ function var_from_URI(name, default_value) {
     }
     tentative_value = href.substring(offset, offset2);
 
-    if (tentative_value) {
-        return Number(tentative_value);
+    if (isNaN(tentative_value) || isNaN(Number(tentative_value))) {
+        return (default_value);
     }
-    return (default_value);
+    return (tentative_value);
 }
 function var_from_form(name, default_value) {
     "use strict";
     var found_value = document.getElementById(name).value;
 
-    if (!found_value) {
+    if (isNaN(found_value) || isNaN(Number(found_value))) {
         return (default_value);
     }
     return Number(found_value);

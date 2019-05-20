@@ -37,7 +37,7 @@ function tan_linear(x1) {
 
     var a = var_from_form("a", NaN);
     var b = var_from_form("b", NaN);
-    if (a === NaN || b === NaN) {
+    if (isNaN(a) || isNaN(b)) {
         return;
     }
 
@@ -63,7 +63,7 @@ function tan_power(x1) {
 
     var c = var_from_form("c", NaN);
     var n = var_from_form("n", NaN);
-    if (c === NaN || n === NaN) {
+    if (isNaN(c) || isNaN(n)) {
         return;
     }
 
@@ -89,7 +89,7 @@ function tan_root(x1) {
 
     var c = var_from_form("c", NaN);
     var n = var_from_form("n", NaN);
-    if (c === NaN || n === NaN) {
+    if (isNaN(c) || isNaN(n)) {
         return;
     }
 
@@ -116,7 +116,7 @@ function tan_exp(x1) {
 
     var c = var_from_form("c", NaN);
     var b = var_from_form("b", NaN);
-    if (c === NaN || b === NaN) {
+    if (isNaN(c) || isNaN(b)) {
         return;
     }
 
