@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Integration of Root Functions</title>
+<link rel="stylesheet" href="math.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="//cxd4.github.io/OpenGL-js/gl.js"></script>
+<script type="text/javascript" src="graph.js"></script>
+<script type="text/javascript" src="tangents.js"></script>
+</head>
+
+<body onload="main_GL(); graph_root()">
+<table>
+<tr><td class="t">0 + <span id="wu">1</span></td><td>&nbsp;</td><td><i>y</i> = <i>c</i>&sdot;<i>x</i><sup>1/<i>n</i></sup> = <i>c</i> &times; <sup><i>n</i></sup>&radic;<i class="r">x</i></td></tr>
+<tr>
+
+<td>
+<noscript>JavaScript is required to graph functions from user input.</noscript>
+<canvas id="GL_canvas" width="513" height="513" onmousemove="tan_root(raster_to_vector(event.clientX))">
+Your browser doesn't appear to support the <code>&lt;CANVAS&gt;</code> element.
+</canvas>
+</td>
+<td>+<span id="wr">1</span></td>
+
+<td><table>
+<tr><td><i>c</i></td><td>=</td><td><input type="text" id="c" value="1" oninput="graph_root()"></td></tr>
+<tr><td><i>n</i></td><td>=</td><td><input type="text" id="n" value="2" oninput="graph_root()"></td></tr>
+</table></td>
+</tr>
+
+<tr>
+<td class="a">0 &minus; <span id="wd">1</span></td>
+<td>&nbsp;</td>
+<td>
+<table>
+<tr><td>&int;(<i>y</i>)&Delta;<i>x</i></td><td>=</td><td><i>cn</i>/(<i>n</i> + 1)&sdot;<i>x</i><sup>1/<i>n</i> + 1</sup> + <i>C</i></td></tr>
+<tr><td>&nbsp;</td><td>=</td><td><i>cn</i>/(<i>n</i> + 1) &sdot; <i>x</i>(<sup><i>n</i></sup>&radic;<i class="r">x</i>)</span> + <i>C</i></td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+<div>Tangent line at (<span id="x"><i>x</i></span>, <span id="y"><i>y</i></span>):</div>
+<div><i>t</i>(<i>x</i>) = <span id="m">(<i>c/n</i> &sdot; <i>x</i><sup>1/<i>n</i> - 1</sup> = <i>c/n</i> &sdot; <sup><i>n</i></sup>&radic;<i class="r">x</i>/<i>x</i>)</span><i>x</i> + <span id="yint"><i>f</i> &prime;(<i>x</i>)&sdot;<i>x</i><sub>1</sub> + <i>y</i><sub>1</sub></span></div>
+
+<p>All JavaScript on this website is freedom-respecting software.  <a href="/free-js.html" rel="jslicense">Learn more.</a></p>
+</body>
+</html>

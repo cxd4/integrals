@@ -83,6 +83,33 @@ function tan_power(x1) {
     tan_f();
     return;
 }
+function tan_root(x1) {
+    "use strict";
+    var y1, m, b;
+
+    var c = var_from_form("c", NaN);
+    var n = var_from_form("n", NaN);
+    if (c === NaN || n === NaN) {
+        return;
+    }
+
+    y1 = c * root(x1, n);
+    m = (c / n) * root(x1, n) / x1; /* f'(x) */
+
+    b = m * (0 - x1) + y1;
+    line_cache[4*0 + Y] = m * (line_cache[4*0 + X] - x1) + y1;
+    line_cache[4*1 + Y] = m * (line_cache[4*1 + X] - x1) + y1;
+
+    document.getElementById("x").innerHTML =
+        x1 * align_pitch(raster_pitch)/2 + "/" + align_pitch(raster_pitch)/2;
+    document.getElementById("y").innerHTML = y1;
+    document.getElementById("m").innerHTML = m;
+    document.getElementById("yint").innerHTML = b;
+
+    graph_root();
+    tan_f();
+    return;
+}
 function tan_exp(x1) {
     "use strict";
     var y1, m, b;

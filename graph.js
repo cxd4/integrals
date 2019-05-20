@@ -137,6 +137,49 @@ function graph_f(callback) {
     return;
 }
 
+function root(x, index) {
+    "use strict";
+    var evaluation;
+    var a = index;
+    var b = 1;
+
+    if (index === 0) {
+        return (undefined); /* 0th root of x = x^(C/0), which is asymptotal. */
+    }
+    evaluation = Math.pow(x, 1 / index);
+    if (!isNaN(evaluation)) { /* Math.pow(-2, 1 / 0.5) doesn't need our help. */
+        return (evaluation);
+    }
+
+/*
+ * If we are taking nth roots of negative numbers, then we must be careful to
+ * account not only for whether n is an even or odd integer but also for the
+ * liklihood that the user will set n to non-integer, floating-point values.
+ *
+ * Since C is implemented on most computers with FLT_RADIX defined to 2, it
+ * makes sense to take a non-integer ratio of (a/b = n/1) and keep
+ * multiplying both a and b by 2 until we have a ratio of integers.
+ *
+ * Note that this does not recover lost precision from quotients such as
+ * 7/9 ~= 77778/100000, due to round-off precision loss from binary storage.
+ */
+    while (a % 2 === 0 && b % 2 === 0) {
+        a /= 2;
+        b /= 2;
+    } 
+    while (a % 1 !== 0) {
+        a *= 2;
+        b *= 2;
+    }
+// alert("a / b = " + a + " / " + b + " ~= " + a / b);
+
+/* As the (a/b)-th root of x is equal to x^(b/a), we then care if (a) is odd. */
+    if (a % 2 === 0) {
+        return (NaN); /* Even-roots of x when (x < 0) are never real numbers. */
+    }
+    return -Math.pow(-x, 1 / index); /* e.g., (-8)^(3333/10000) hacked to -2 */
+}
+
 /**
  * End of graph definition and initialization procedures.
  * Begin definitions for graph construction functions.
@@ -170,6 +213,21 @@ function graph_power() {
         i += 1;
     }
     graph_f(tan_power);
+    return;
+}
+function graph_root() {
+    "use strict";
+    var i = 0;
+    var x = -inverse_zoom;
+    var c = var_from_form("c", 1);
+    var n = var_from_form("n", 2);
+
+    while (i < raster_pitch) {
+        vertex_buffer[4*i + Y] = c * root(x, n);
+        x += (2 * inverse_zoom) / raster_pitch;
+        i += 1;
+    }
+    graph_f(tan_root);
     return;
 }
 function graph_exp() {

@@ -24,3 +24,17 @@ table.t {
 td.t { /* titular data */
     text-align:  center;
 }
+
+td.a {
+    vertical-align:  top;
+    text-align:  center;
+}
+td.b {
+    vertical-align:  bottom;
+    text-align:  center;
+}
+
+/* to overline expressions under radical signs */
+span.r, i.r {
+    text-decoration:  overline;
+}
