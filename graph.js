@@ -141,7 +141,7 @@ function root(x, index) {
     "use strict";
     var a = index;
     var b = 1;
-    var evaluation = Math.pow(x, b / index);
+    var evaluation = Math.pow(x, b / a);
 
     if (index === 0) {
         return (undefined); /* 0th root of x = x^(C/0), which is asymptotal. */
@@ -185,9 +185,10 @@ function power(x, n) {
     "use strict";
     var a = n;
     var b = 1;
+    var evaluation = Math.pow(x, a / b);
 
-    if (x >= 0) {
-        return Math.pow(x, n);
+    if (!isNaN(evaluation)) { /* Math.pow(-1, 0) doesn't need our help. */
+        return (evaluation);
     }
 
     while (a % 1 !== 0) {
@@ -203,7 +204,7 @@ function power(x, n) {
     if (b % 2 === 0) {
         return (NaN); /* Even-roots of x when (x < 0) are never real numbers. */
     }
-    return -Math.pow(-x, n);
+    return -Math.pow(-x, n); /* fails when (n === 0), which was accounted for */
 }
 
 /**
