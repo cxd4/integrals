@@ -162,7 +162,7 @@ function graph_power() {
     var i = 0;
     var x = -inverse_zoom;
     var c = var_from_form("c", 1);
-    var n = var_from_form("n", 0);
+    var n = var_from_form("n", 2);
 
     while (i < raster_pitch) {
         vertex_buffer[4*i + Y] = c * Math.pow(x, n);
@@ -177,7 +177,7 @@ function graph_exp() {
     var i = 0;
     var x = -inverse_zoom;
     var c = var_from_form("c", 1);
-    var b = var_from_form("b", 0);
+    var b = var_from_form("b", Math.E);
 
     while (i < raster_pitch) {
         vertex_buffer[4*i + Y] = c * Math.pow(b, x);
